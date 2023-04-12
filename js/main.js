@@ -151,6 +151,10 @@ function sortByColor() {
 }
 
 
+for(let i = 0; i < tasks.length; i++){
+  tasks[i].color = "hsl(60, 100%, 50%)";
+}
+
 
 function getColor(colorOfTask) {
   // let hueArray = [30, 60, 120, 180, 210, 240, 270, 300, 330]
