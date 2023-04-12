@@ -155,13 +155,13 @@ function sortByColor() {
 function getColor(colorOfTask) {
   let hueArray = [30, 60, 120, 180, 210, 240, 270, 300, 330]
 
-  // исправляем цвета на устройствах людей которые тестируют приложуху
-  if (!hueArray.includes(currentHue)) {
-    currentHue = 30;
-  }
-
   // из формата hsl(95, 80%, 50%) мы достаем первые 2 цифры и преобразуем их в число с помощью регулярного выражения
   const currentHue = parseInt(colorOfTask.match(/\d+(?=,)/)[0]);
+
+   // исправляем цвета на устройствах людей которые тестируют приложуху
+   if (!hueArray.includes(currentHue)) {
+    currentHue = 30;
+  }
 
   // создаем переменную в которой будем хранить индекс цвета взятый из массива цветов
   let currentIndex
