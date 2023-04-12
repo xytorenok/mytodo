@@ -4,25 +4,20 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-/* h1 {
-  font-size: 2em;
-  height: 80px;
-  color: white;
-  background-color: #259bcc;
-  text-align: center;
-  line-height: 80px;
-  margin-bottom: 40px;
-} */
+button {
+  /* font-family: 'Poppins', sans-serif; */
+}
+
 
 .h1 {
-  font-size: 2em;
+  width: 100%;
   height: 80px;
   color: white;
-  background-color: #259bcc;
+  background-color: #36aaff;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 
 main {
@@ -30,31 +25,46 @@ main {
   margin: 0 auto;
 }
 
+.info {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 15px;
+}
+
+.done,
+.do {
+  display: flex;
+  align-items: center;
+}
+
+.info p {
+  font-size: 23px;
+  font-weight: 500;
+  margin-top: 2px;
+  margin-left: 1px;
+}
+
 #form {
   position: relative;
 }
 
 #form input {
-  background-color: #bbb;
+  background: url(../img/Adrenaline.svg), url(../img/Dopamine.svg), url(../img/Serotonin.svg), url(../img/input-bg.svg);
+  background-position: left 5px, right 23px, center 10px, right;
   width: 100%;
   border-radius: 10px;
-  height: 3em;
+  height: 2.2em;
   padding-left: 15px;
   padding-right: 60px;
+  font-size: 20px;
 }
 
-
-
-/* #form button {
-  position: absolute;
-  right: 20px;
-  top: 4px;
-  padding: 1px 10px;
-  background: none;
-  border-radius: 50%;
-  border: 2px solid #000;
-  font-size: 30px;
-} */
+#form input::placeholder {
+  color: black;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+}
 
 #form button {
   position: absolute;
@@ -73,9 +83,23 @@ main {
   max-width: 75%;
 }
 
-#taskList {
-  margin-top: 40px;
+.buttons button {
+  margin-top: 10px;
+  margin-left: 17px;
+}
 
+.buttons button svg {
+  stroke: #000;
+  transition: stroke 4s ease;
+}
+
+.buttons button:hover svg {
+  stroke: #36aaff;
+  transition: stroke 0.3s ease;
+}
+
+#taskList {
+  margin-top: 15px;
 }
 
 #taskList li {
@@ -114,7 +138,7 @@ main {
 }
 
 #taskList :checked+span {
-  background-size: 100% 2px;
+  background-size: 100% 1px;
 }
 
 /* #taskList button {
@@ -172,12 +196,10 @@ main {
   background-repeat: no-repeat;
   width: 20px;
   height: 20px;
-
 }
-
 
 @media (max-width: 767px) {
   main {
-    width: 99%;
+    width: 100%;
   }
 }
