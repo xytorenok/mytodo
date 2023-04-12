@@ -2,17 +2,31 @@ let tasks = []
 
 loadTasks()
 showTasks()
+countTask()
+
+function countTask() {
+  const doneTasks = tasks.filter(task => task.done)
+  const doTasks = tasks.filter(task => !task.done)
+
+  doneText.innerHTML = `${doneTasks.length}`
+  doText.innerHTML = `${doTasks.length}`
+}
 
 form.onsubmit = () => {
   addTask(form.task.value)
   form.reset()
 }
 
+doneSortBtn.onclick = sortDoneLast
+dateSortBtn.onclick = sortNewFirst
+colorSortBtn.onclick = sortByColor
+
 taskList.onchange = e => {
   const { id } = e.target.closest('li').dataset
   const { checked } = e.target
 
   updateTask(id, checked)
+  countTask()
 }
 
 taskList.onclick = e => {
@@ -28,9 +42,14 @@ taskList.onclick = e => {
 }
 
 function deleteTask(id) {
+  const agree = confirm('Are you sure?')
+
+  if (!agree) return
+
   tasks = tasks.filter(t => t.id != id)
   saveTasks()
   showTasks()
+  countTask()
 }
 
 function editTask(id) {
@@ -45,7 +64,7 @@ function editTask(id) {
 function openTask(id) {
   const task = tasks.find(t => t.id == id)
 
-  task.color = getColor()
+  task.color = getColor(task.color)
   saveTasks()
   showTasks()
 }
@@ -89,19 +108,103 @@ function buildTask({ id, text, done, color }) {
 }
 
 function addTask(text) {
-  tasks.unshift({ id: Date.now(), text, done: false, color: 'grey' })
+  text = text.trim()
+
+  if (!text) return
+
+  tasks.unshift({ id: Date.now(), text, done: false, color: 'hsl(180, 80%, 50%);' })
+  saveTasks()
+  showTasks()
+  countTask()
+}
+
+function sortDoneLast() {
+  tasks.sort((a, b) => {
+    if (a.done && !b.done) return 1
+    if (b.done && !a.done) return -1
+    return 0
+  })
+
+  saveTasks()
+  showTasks()
+}
+
+function sortNewFirst() {
+  //сложная запись
+  // tasks.sort((a,b) => {
+  //   if (a.id > b.id) return -1
+  //   if (a.id < b.id) return 1
+  // })
+
+  // упрощенная запись
+  tasks.sort((a, b) => b.id - a.id)
+
+  saveTasks()
+  showTasks()
+}
+
+function sortByColor() {
+  tasks.sort((a, b) => a.color.localeCompare(b.color));
+
   saveTasks()
   showTasks()
 }
 
 
-// my code
 
-function getColor() {
-  const letters = '0123456789ABCDEF'
-  let color = '#'
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)]
+function getColor(colorOfTask) {
+  let hueArray = [30, 60, 120, 180, 210, 240, 270, 300, 330]
+
+  // из формата hsl(95, 80%, 50%) мы достаем первые 2 цифры и преобразуем их в число с помощью регулярного выражения
+  const currentHue = parseInt(colorOfTask.match(/\d+(?=,)/)[0]);
+
+  // создаем переменную в которой будем хранить индекс цвета взятый из массива цветов
+  let currentIndex
+  for (let i = 0; i < hueArray.length; i++) {
+    if (hueArray[i] === currentHue) {
+      currentIndex = i
+      break
+    }
   }
+
+  // зацикливаем индекс массива hueArray от 0 до 8
+  let newIndex = currentIndex + 1
+  if (newIndex == 9) newIndex = 0
+
+  // создаем переменную в которой будет хранится одно из значений массива, эту переменную присваеваем переменной color
+  const newColor = hueArray[newIndex];
+
+  let color = `hsl(${newColor}, 100%, 50%)`
+
   return color
 }
+
+
+// let hueArray = [30, 60, 120, 180, 210, 240, 270, 300, 330];
+// let inputValue = 120; // или любое другое значение
+// let curentIndex;
+
+// for (let i = 0; i < hueArray.length; i++) {
+//   if (hueArray[i] === inputValue) {
+//     curentIndex = i;
+//     break;
+//   }
+// }
+
+// const colorString = 'hsl(95, 80%, 50%)';
+// const hue = parseInt(colorString.match(/\d+(?=,)/)[0]);
+// console.log(hue);
+
+// function getColor() {
+//   let currentIndex = 2;
+//   const hue = [0, 30, 60, 120, 180, 210, 240, 270, 300, 330];
+//   return function() {
+//     const currentColor = hue[currentIndex];
+//     let color = `hsl(${currentColor}, 80%, 50%)`;
+//     currentIndex++;
+//     if (currentIndex === hue.length) {
+//       currentIndex = 0;
+//     }
+//     return color;
+//   }
+// }
