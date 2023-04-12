@@ -151,38 +151,30 @@ function sortByColor() {
 }
 
 
-for(let i = 0; i < tasks.length; i++){
-  tasks[i].color = "hsl(60, 100%, 50%)";
-}
-
 
 function getColor(colorOfTask) {
-  // let hueArray = [30, 60, 120, 180, 210, 240, 270, 300, 330]
+  let hueArray = [30, 60, 120, 180, 210, 240, 270, 300, 330]
 
-  // // из формата hsl(95, 80%, 50%) мы достаем первые 2 цифры и преобразуем их в число с помощью регулярного выражения
-  // const currentHue = parseInt(colorOfTask.match(/\d+(?=,)/)[0]);
+  // из формата hsl(95, 80%, 50%) мы достаем первые 2 цифры и преобразуем их в число с помощью регулярного выражения
+  const currentHue = parseInt(colorOfTask.match(/\d+(?=,)/)[0]);
 
-  // // создаем переменную в которой будем хранить индекс цвета взятый из массива цветов
-  // let currentIndex
-  // for (let i = 0; i < hueArray.length; i++) {
-  //   if (hueArray[i] === currentHue) {
-  //     currentIndex = i
-  //     break
-  //   }
-  // }
+  // создаем переменную в которой будем хранить индекс цвета взятый из массива цветов
+  let currentIndex
+  for (let i = 0; i < hueArray.length; i++) {
+    if (hueArray[i] === currentHue) {
+      currentIndex = i
+      break
+    }
+  }
 
-  // // зацикливаем индекс массива hueArray от 0 до 8
-  // let newIndex = currentIndex + 1
-  // if (newIndex == 9) newIndex = 0
+  // зацикливаем индекс массива hueArray от 0 до 8
+  let newIndex = currentIndex + 1
+  if (newIndex == 9) newIndex = 0
 
-  // // создаем переменную в которой будет хранится одно из значений массива, эту переменную присваеваем переменной color
-  // const newColor = hueArray[newIndex];
+  // создаем переменную в которой будет хранится одно из значений массива, эту переменную присваеваем переменной color
+  const newColor = hueArray[newIndex];
 
-  // let color = `hsl(${newColor}, 100%, 50%)`
-
-
-// временный код
-  let color = `hsl(30, 100%, 50%)`
+  let color = `hsl(${newColor}, 100%, 50%)`
 
   return color
 }
