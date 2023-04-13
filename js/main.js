@@ -42,15 +42,58 @@ taskList.onclick = e => {
 }
 
 function deleteTask(id) {
-  const agree = confirm('Are you sure?')
+  confirmWindow.style.display = 'flex'
 
-  if (!agree) return
+  deleteYes.onclick = function () {
+    confirmWindow.style.display = 'none'
+    tasks = tasks.filter(t => t.id != id)
+    saveTasks()
+    showTasks()
+    countTask()
+  }
 
-  tasks = tasks.filter(t => t.id != id)
-  saveTasks()
-  showTasks()
-  countTask()
+  deleteNo.onclick = function () {
+    confirmWindow.style.display = 'none'
+  }
 }
+
+
+// не работает этот код, спросить почему
+// function deleteTask(id) {
+//   confirmWindow.style.display= 'block'
+
+//   let agree = false
+
+//   deleteYes.onclick = function(){
+//     agree = true
+//     console.log(agree);
+//     confirmWindow.style.display= 'none'
+//   }
+
+//   deleteNo.onclick = function(){
+//     agree = false
+//     console.log(agree);
+//     confirmWindow.style.display= 'none'
+//   }
+
+//   if (!agree) return
+
+//   tasks = tasks.filter(t => t.id != id)
+//   saveTasks()
+//   showTasks()
+//   countTask()
+// }
+
+// function deleteTask(id) {
+//   const agree = confirm('Are you sure?')
+
+//   if (!agree) return
+
+//   tasks = tasks.filter(t => t.id != id)
+//   saveTasks()
+//   showTasks()
+//   countTask()
+// }
 
 function editTask(id) {
   const task = tasks.find(t => t.id == id)
@@ -60,7 +103,6 @@ function editTask(id) {
   showTasks()
 }
 
-// my code
 function openTask(id) {
   const task = tasks.find(t => t.id == id)
 
@@ -150,8 +192,6 @@ function sortByColor() {
   showTasks()
 }
 
-
-
 function getColor(colorOfTask) {
   let hueArray = [30, 60, 120, 180, 210, 240, 270, 300, 330]
 
@@ -166,11 +206,11 @@ function getColor(colorOfTask) {
       break
     }
   }
+  console.log(hueArray.length);
 
-  // зацикливаем индекс массива hueArray от 0 до 8
+  // зацикливаем индекс массива hueArray от 0 до 8(в данном случае)
   let newIndex = currentIndex + 1
-  if (newIndex == 9) newIndex = 0
-
+  if (newIndex == hueArray.length) newIndex = 0
   // создаем переменную в которой будет хранится одно из значений массива, эту переменную присваеваем переменной color
   const newColor = hueArray[newIndex];
 
@@ -180,31 +220,3 @@ function getColor(colorOfTask) {
 }
 
 
-// let hueArray = [30, 60, 120, 180, 210, 240, 270, 300, 330];
-// let inputValue = 120; // или любое другое значение
-// let curentIndex;
-
-// for (let i = 0; i < hueArray.length; i++) {
-//   if (hueArray[i] === inputValue) {
-//     curentIndex = i;
-//     break;
-//   }
-// }
-
-// const colorString = 'hsl(95, 80%, 50%)';
-// const hue = parseInt(colorString.match(/\d+(?=,)/)[0]);
-// console.log(hue);
-
-// function getColor() {
-//   let currentIndex = 2;
-//   const hue = [0, 30, 60, 120, 180, 210, 240, 270, 300, 330];
-//   return function() {
-//     const currentColor = hue[currentIndex];
-//     let color = `hsl(${currentColor}, 80%, 50%)`;
-//     currentIndex++;
-//     if (currentIndex === hue.length) {
-//       currentIndex = 0;
-//     }
-//     return color;
-//   }
-// }
