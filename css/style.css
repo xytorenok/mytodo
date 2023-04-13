@@ -5,7 +5,7 @@ body {
 }
 
 button {
-  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Poppins', sans-serif;
 }
 
 
@@ -21,7 +21,7 @@ button {
 }
 
 main {
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
 }
 
@@ -115,7 +115,7 @@ main {
 
 #taskList .color {
   position: absolute;
-  background-color: #88f;
+  background-color: hsl(30, 100%, 50%);
   width: 9px;
   height: 30px;
   border-radius: 0 5px 5px 0;
@@ -140,13 +140,6 @@ main {
 #taskList :checked+span {
   background-size: 100% 1px;
 }
-
-/* #taskList button {
-  background-color: #8f8;
-  border: none;
-  width: 40px;
-  height: 40px;
-} */
 
 #taskList .shorter-wrap {
   width: 75%;
@@ -196,6 +189,33 @@ main {
   background-repeat: no-repeat;
   width: 20px;
   height: 20px;
+}
+
+#confirmWindow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 200px;
+  width: 60%;
+  padding-top: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+}
+
+#confirmWindow .confirm-buttons{
+  display: flex;
+  align-items: start;
+  gap: 60px;
+}
+
+#confirmWindow button{
+  padding: 5px;
 }
 
 @media (max-width: 767px) {
